@@ -23,8 +23,8 @@ javacOptions in doc ++= Seq("-source", "1.7")
 libraryDependencies ++= Seq(
   "javax.activation" % "activation"      % "1.1",
   "javax.mail"       % "mail"            % "1.4.3",
-  "asm"              % "asm"             % "3.3.1",
-  "asm"              % "asm-commons"     % "3.3.1",
+  "org.ow2.asm"      % "asm"             % "6.2.1",
+  "org.ow2.asm"      % "asm-commons"     % "6.2.1",
   "commons-logging"  % "commons-logging" % "1.1.1",
   "org.slf4j"        % "slf4j-jdk14"     % "1.6.4",
   "junit"            % "junit"           % "4.12"  % Test,

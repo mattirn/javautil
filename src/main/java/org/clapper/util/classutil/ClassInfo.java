@@ -12,7 +12,7 @@ import java.util.Set;
 
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.commons.EmptyVisitor;
+import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Opcodes;
 
@@ -25,7 +25,7 @@ import org.objectweb.asm.Opcodes;
  * <a href="http://asm.objectweb.org"><i>asm.objectweb.org</i></a> for
  * details on ASM.</p>
  */
-public class ClassInfo extends EmptyVisitor
+public class ClassInfo extends ClassVisitor
 {
     static int ASM_CR_ACCEPT_CRITERIA = 0;
 
@@ -54,6 +54,7 @@ public class ClassInfo extends EmptyVisitor
      */
     public ClassInfo(File classFile) throws ClassUtilException
     {
+    	super(Opcodes.ASM5);
         try
         {
             ClassReader cr = new ClassReader(new FileInputStream(classFile));
@@ -79,6 +80,7 @@ public class ClassInfo extends EmptyVisitor
      */
     public ClassInfo(InputStream is) throws ClassUtilException
     {
+    	super(Opcodes.ASM5);
         try
         {
             ClassReader cr = new ClassReader(is);
@@ -111,6 +113,7 @@ public class ClassInfo extends EmptyVisitor
               int      asmAccessMask,
               File     location)
     {
+    	super(Opcodes.ASM5);
         setClassFields(name, superClassName, interfaces, asmAccessMask, location);
     }
 

@@ -2,7 +2,8 @@ package org.clapper.util.classutil;
 
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.commons.EmptyVisitor;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.Opcodes;
 
 import java.io.File;
 import java.util.Map;
@@ -18,7 +19,7 @@ import java.util.Map;
  *
  * @see ClassFinder
  */
-class ClassInfoClassVisitor extends EmptyVisitor
+class ClassInfoClassVisitor extends ClassVisitor
 {
     /*----------------------------------------------------------------------*\
                             Private Data Items
@@ -44,6 +45,7 @@ class ClassInfoClassVisitor extends EmptyVisitor
      */
     ClassInfoClassVisitor(Map<String,ClassInfo> foundClasses, File location)
     {
+        super(Opcodes.ASM5);
         this.foundClasses = foundClasses;
         this.location = location;
     }
