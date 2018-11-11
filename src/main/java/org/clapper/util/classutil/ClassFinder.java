@@ -577,34 +577,27 @@ public class ClassFinder
 
             for (Object key : keys)
             {
+                if (!key.toString().equals ("Class-Path"))continue;
                 String value = (String) attrs.get (key);
+                String jarName = jar.getName();
+                log.debug ("Adding Class-Path from jar: "+ jarName);
 
-                if (key.toString().equals ("Class-Path"))
+                StringBuilder buf = new StringBuilder();
+                String parent = jarFile.getParent();
+                String tokens[] = value.split("\\s+");
+                for (int i=0; i<tokens.length; i++)
                 {
-                    String jarName = jar.getName();
-                    log.debug ("Adding Class-Path from jar " + jarName);
-
-                    StringBuilder buf = new StringBuilder();
-                    StringTokenizer tok = new StringTokenizer (value);
-                    while (tok.hasMoreTokens())
+                    buf.setLength (0);
+                    if (parent != null)
                     {
-                        buf.setLength (0);
-                        String element = tok.nextToken();
-                        String parent = jarFile.getParent();
-                        if (parent != null)
-                        {
-                            buf.append (parent);
-                            buf.append (File.separator);
-                        }
-
-                        buf.append (element);
+                        buf.append (parent);
+                        buf.append (File.separator);
                     }
-
-                    String element = buf.toString();
-                    log.debug ("From " + jarName + ": " + element);
-
-                    add (new File (element));
+                    buf.append (tokens[i]);
+                    log.debug ("From " + jarName + ": " + tokens[i]);
+                    add (new File (buf.toString()));
                 }
+                break;
             }
         }
 
